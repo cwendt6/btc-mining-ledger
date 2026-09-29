@@ -75,9 +75,37 @@ class BasedMiningPool:
         return self._get("pool/participations")
 
     def stats(self, address: str) -> dict:
-        """Pool-level stats plus your participation row, if the pool has seen you."""
         pool = self.pool_stats().get("pool", {})
         return {"pool": pool, "yours": self.participations().get(address)}
 
 
-POOLS: dict[str, type] = {"ocean": OceanPool, "basedmining": BasedMiningPool}
+class BtcPowLabPool:
+    """BTC PoW Lab public per-address mining summary. No key required.
+
+    The endpoint reports observed Stratum work and connection state. It does not
+    imply that a block, reward, or payout is guaranteed.
+    """
+
+    name = "btcpowlab"
+    base = "https://btcpowlab-pool.com/public/v1"
+
+    def __init__(self, client: httpx.Client | None = None):
+        self.client = client or httpx.Client(timeout=20)
+
+    def _get(self, path: str) -> dict:
+        r = self.client.get(f"{self.base}/{path}")
+        r.raise_for_status()
+        return r.json()
+
+    def stats(self, address: str) -> dict:
+        return self._get(f"miner/{address}/summary")
+
+    def connection(self, address: str) -> dict:
+        return self._get(f"miner/{address}/connection")
+
+
+POOLS: dict[str, type] = {
+    "ocean": OceanPool,
+    "basedmining": BasedMiningPool,
+    "btcpowlab": BtcPowLabPool,
+}

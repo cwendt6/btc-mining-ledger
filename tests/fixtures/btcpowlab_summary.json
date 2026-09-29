@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "connected": true,
+  "accepted_shares": 42,
+  "rejected_shares": 1,
+  "hashrate_5m_hs": 1000000000000
+}
