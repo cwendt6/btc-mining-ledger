@@ -44,7 +44,7 @@ flowchart LR
   D --> F[Sell simulator]
 ```
 
-Events are the source of truth; lots are rebuilt by replaying them in time order. The `spine` package (schema + lot engine) is shared with `tax-planner`, `equity-tax-planner` and `onchain-desk`.
+Events are the source of truth; lots are rebuilt by replaying them in time order. See [docs/architecture.md](docs/architecture.md) for the replay design. The `spine` package (schema + lot engine) is shared with `tax-planner`, `equity-tax-planner` and `onchain-desk`.
 
 ## Layout
 
