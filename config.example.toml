@@ -1,0 +1,37 @@
+# Copy to ../data/ledger.toml (outside the repo) and point LEDGER_CONFIG at it.
+# Never commit your real config: it holds wallet addresses.
+
+db_path = "~/Documents/dev/data/ledger.duckdb"
+
+# Swap to your Mac mini's self-hosted mempool once the node is running,
+# e.g. "http://localhost:8999"
+mempool_url = "https://mempool.space"
+
+# One block per wallet. Payout wallets are chain-watched: every confirmed output to
+# `address` is booked as mining income at that moment's price.
+[[wallets]]
+name = "payout-basedmining"
+kind = "self_custody"
+address = "bc1q...your-basedmining-payout-address"
+source = "basedmining"
+method = "hifo"   # fifo | hifo | spec_id, set per wallet per tax year
+
+[[wallets]]
+name = "payout-ocean"
+kind = "self_custody"
+address = "bc1q...your-ocean-payout-address"
+source = "ocean"
+method = "hifo"
+
+[[wallets]]
+name = "coinbase"
+kind = "exchange"
+method = "fifo"
+
+# Marginal-rate estimate for the sell simulator. The tax-planner repo replaces this.
+[tax]
+federal_ordinary = 0.24
+federal_ltcg = 0.15
+niit = 0.0
+state = 0.0295   # Indiana flat rate: verify for the current year
+county = 0.0     # your Indiana county rate: fill in

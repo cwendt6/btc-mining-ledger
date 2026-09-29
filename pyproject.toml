@@ -1,0 +1,42 @@
+[project]
+name = "btc-mining-ledger"
+version = "0.1.0"
+description = "Cost basis, mining income and sell-tax simulator for home Bitcoin miners."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Cole Wendt" }]
+requires-python = ">=3.11"
+dependencies = [
+  "duckdb>=1.0",
+  "httpx>=0.27",
+  "typer>=0.12",
+  "rich>=13",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.36", "pandas>=2.2"]
+dev = ["pytest>=8", "ruff>=0.5", "pre-commit>=3.7"]
+
+[project.scripts]
+ledger = "ledger.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spine", "src/ledger"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Option", "typer.Argument"]

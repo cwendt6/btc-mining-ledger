@@ -1,0 +1,13 @@
+[
+  {"txid": "tx03", "status": {"confirmed": false},
+   "vin": [{"is_coinbase": false}],
+   "vout": [{"scriptpubkey_address": "bc1qexamplepayoutaddress0000000000000000000", "value": 99999}]},
+  {"txid": "tx02", "status": {"confirmed": true, "block_time": 1758000000},
+   "vin": [{"is_coinbase": false}],
+   "vout": [{"scriptpubkey_address": "bc1qexamplepayoutaddress0000000000000000000", "value": 50000},
+            {"scriptpubkey_address": "bc1qsomeoneelse", "value": 1000}]},
+  {"txid": "cb01", "status": {"confirmed": true, "block_time": 1757000000},
+   "vin": [{"is_coinbase": true}],
+   "vout": [{"scriptpubkey_address": "bc1qpoolfinder", "value": 100000000},
+            {"scriptpubkey_address": "bc1qexamplepayoutaddress0000000000000000000", "value": 12345}]}
+]
