@@ -24,6 +24,13 @@ source = "ocean"
 method = "hifo"
 
 [[wallets]]
+name = "payout-btcpowlab"
+kind = "self_custody"
+address = "bc1q...your-btcpowlab-payout-address"
+source = "btcpowlab"
+method = "hifo"
+
+[[wallets]]
 name = "coinbase"
 kind = "exchange"
 method = "fifo"
